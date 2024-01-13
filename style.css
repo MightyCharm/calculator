@@ -7,6 +7,10 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(168, 172, 186);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 h1 {
@@ -16,48 +20,43 @@ h1 {
 }
 
 .container {
-    border: 1px solid black;
+    border: 5px solid black;
+    border-radius: 5px;
+    background-color: hsl(240, 11%, 33%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex-grow: 1;
+    padding: 5px;
 
 }
 
-.flexbox-1 {
+.row-1 {
     display: flex;
     
 }
 
-.flexbox-2 {
+.row-2 {
     display: flex;
   
 }
 
-.flexbox-3 {
+.row-3 {
     display: flex;
 
    
 }
 
-.flexbox-4 {
+.row-4 {
     display: flex;
     
 }
 
-.flexbox-5 {
+.row-5 {
     display: flex;
 
  
-}
-
-
-.btn {
-    width: 100px;
-    flex: 1;
-    height: 100px;
-    border-radius: 4px;
-    font-size: 25px;
 }
 
 .display {
@@ -66,9 +65,45 @@ h1 {
     align-items: center;
     height: 100px;
     width: 400px;
-    border: 1px solid black;
+    border: 5px solid black;
     border-radius: 5px;
     font-size: 20px;
     background-color: white;
     font-size: 30px;
 }
+
+.btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    font-size: 30px;
+    background-color: rgb(16, 29, 54);
+    color: white;
+}
+
+.btn:hover {
+    background-color: rgb(25, 46, 86);
+}
+
+.btn:active {
+    background-color: rgb(38, 73, 139);
+}
+
+.btn-op {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    font-size: 30px;
+    color: white;
+    background-color: rgb(181, 82, 11);
+}
+
+.btn-op:hover {
+    background-color: rgb(215, 103, 23);
+}
+
+.btn-op:active {
+    background-color: rgb(255, 125, 31);
+}
+
+

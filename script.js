@@ -1,4 +1,7 @@
-
+function clearDisplay() {
+    console.log("function clearDisplay()");
+    display.textContent = "";
+}
 
 function add(a, b) {
     console.log("add: " + a + " : " + b);
@@ -21,7 +24,12 @@ function divide(a, b) {
 };
 
 
-function operate(operator, num1, num2) {
+function operate(arr) {
+    console.log("function operate()");
+    
+    console.log(arr[0] + " " + arr[1] + " " + arr[2]);
+    /*
+    
     let calculation;
     switch(operator) {
         case "+":
@@ -38,14 +46,30 @@ function operate(operator, num1, num2) {
             break;
     };
     return calculation;
+    */
 };
 
-function getUserInput() {
+function getOperator(op) {
+    
+    console.log("function getOperator()");
+    
+    mathAssignment.push(userInput);
+    mathAssignment.push(op);
+    userInput = "";
+    console.log(mathAssignment);
 
+    
 }
 
 
-let mathAssignment = "";
+function getNumber(num) {
+    userInput += num;
+    console.log("function getNumber()");
+    display.textContent = userInput;
+}
+
+let userInput = "";
+let mathAssignment = [];
 
 const display = document.querySelector("#display");
 const container = document.querySelector("#container");
@@ -70,5 +94,23 @@ const btnEqual = document.querySelector("#btn-equal");
 
 // eventlistener for all buttons
 container.addEventListener("click", (e) => {
-    getUserInput(e.target.value);
+    let value = e.target.value;
+    if (value != undefined) {
+        switch(value) {
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                getOperator(value);
+                break;
+            case "clear":
+                clearDisplay();
+                break;
+            case "=":
+                operate();
+                break;
+            default:
+                getNumber(value);
+        }    
+    }   
 });
