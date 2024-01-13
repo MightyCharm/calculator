@@ -1,33 +1,36 @@
-function clearDisplay() {
-    console.log("function clearDisplay()");
-    display.textContent = "";
+function clear() {
+    userInput = "";
+    display.value = "";
 }
 
-function add(a, b) {
-    console.log("add: " + a + " : " + b);
-    return a + b;
-};
+function setBtnColor(op) {
+    btnAdd.style.backgroundColor = initialColor;
+    btnSubtract.style.backgroundColor = initialColor;
+    btnMultiply.style.backgroundColor = initialColor;
+    btnDivide.style.backgroundColor = initialColor;
+    if(op === "+") {
+        btnAddActive = true;
+        btnAdd.style.backgroundColor = color;
+    }
+    if(op === "-") {
+        btnSubtractActive = true;
+        btnSubtract.style.backgroundColor = color;
+    }
+    if(op === "*") {
+        btnMultiplyActive = true;
+        btnMultiply.style.backgroundColor = color;
+    }
+    if(op === "/") {
+        btnDivideActive = true;
+        btnDivide.style.backgroundColor = color;
+    }
 
-function subtract(a, b) {
-    console.log("subtract: " + a + " : " + b);
-    return a - b;
-};
-
-function multiply(a, b) {
-    console.log("multiply: " + a + " : " + b);
-    return a * b;
-};
-
-function divide(a, b) {
-    console.log("divide: " + a + " : " + b);
-    return a / b;
-};
+}
 
 
 function operate(arr) {
     console.log("function operate()");
     
-    console.log(arr[0] + " " + arr[1] + " " + arr[2]);
     /*
     
     let calculation;
@@ -50,67 +53,66 @@ function operate(arr) {
 };
 
 function getOperator(op) {
-    
     console.log("function getOperator()");
+    setBtnColor(op);
     
-    mathAssignment.push(userInput);
-    mathAssignment.push(op);
-    userInput = "";
-    console.log(mathAssignment);
-
     
+    display.value = userInput;
 }
 
+function getNum(input) {
+    console.log("function getInput()");
+    // if number button is pressed set back color of operator buttons to normal
+    btnAdd.style.backgroundColor = initialColor;
+    btnSubtract.style.backgroundColor = initialColor;
+    btnMultiply.style.backgroundColor = initialColor;
+    btnDivide.style.backgroundColor = initialColor;
 
-function getNumber(num) {
-    userInput += num;
-    console.log("function getNumber()");
-    display.textContent = userInput;
+
+    console.log(input);
+    userInput += input;
+    display.value = userInput;
 }
 
 let userInput = "";
-let mathAssignment = [];
-
 const display = document.querySelector("#display");
-const container = document.querySelector("#container");
-const btn0 = document.querySelector("#btn-0");
-const btn1 = document.querySelector("#btn-1");
-const btn2 = document.querySelector("#btn-2");
-const btn3 = document.querySelector("#btn-3");
-const btn4 = document.querySelector("#btn-4");
-const btn5 = document.querySelector("#btn-5");
-const btn6 = document.querySelector("#btn-6");
-const btn7 = document.querySelector("#btn-7");
-const btn8 = document.querySelector("#btn-8");
-const btn9 = document.querySelector("#btn-9");
 
-const btnAdd = document.querySelector("#btn-add");
-const btnSubtract = document.querySelector("#btn-subtract");
-const btnMultiply = document.querySelector("#btn-multiply");
-const btnDivide = document.querySelector("#btn-divide");
+// variables for setting the color of the operator button if pressed
+const initialColor= "rgb(181, 11, 11)";
+const color = "rgb(255, 138, 48)";
+let btnAddActive = false;
+let btnSubtractActive = false;
+let btnMultiplyActive = false;
+let btnDivideActive = false;
 
-const btnClear = document.querySelector("#btn-clear");
-const btnEqual = document.querySelector("#btn-equal");
+const btnAdd = document.querySelector(".btn-add");
+const btnSubtract = document.querySelector(".btn-subtract");
+const btnMultiply = document.querySelector(".btn-multiply");
+const btnDivide = document.querySelector(".btn-divide");
+// variables for getting list of buttons to append an event listener
+const btnNumbers = document.querySelectorAll("#btn-num");
+const btnOperator = document.querySelectorAll("#btn-op");
 
-// eventlistener for all buttons
-container.addEventListener("click", (e) => {
-    let value = e.target.value;
-    if (value != undefined) {
-        switch(value) {
+// append event listener for all buttons 0-9
+btnNumbers.forEach( (btn) => {
+    btn.addEventListener("click", (e) => {
+        getNum(e.target.value);
+    })  
+});
+
+// append event listener for all operator buttons
+btnOperator.forEach( (btn) => {
+    btn.addEventListener("click", (e) => {
+        switch(e.target.value) {
+            case "clear":
+                clear();
+                break;
             case "+":
             case "-":
             case "*":
             case "/":
-                getOperator(value);
+                getOperator(e.target.value);
                 break;
-            case "clear":
-                clearDisplay();
-                break;
-            case "=":
-                operate();
-                break;
-            default:
-                getNumber(value);
-        }    
-    }   
+        }
+    })
 });

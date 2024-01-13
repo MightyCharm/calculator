@@ -1,12 +1,13 @@
 * {
     box-sizing: border-box;  
     margin: 0;
-    padding: 0;  
+    padding: 0;
+    font-weight: bold;  
 }
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: rgb(168, 172, 186);
+    background: linear-gradient(to right, rgb(255, 255, 255), rgb(134, 134, 134));
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,7 +21,7 @@ h1 {
 }
 
 .container {
-    border: 5px solid black;
+    border: 2px solid black;
     border-radius: 5px;
     background-color: hsl(240, 11%, 33%);
     display: flex;
@@ -70,9 +71,11 @@ h1 {
     font-size: 20px;
     background-color: white;
     font-size: 30px;
+    text-align: right;
+    padding-right: 10px;
 }
 
-.btn {
+.btn-num {
     width: 100px;
     height: 100px;
     border-radius: 50px;
@@ -81,11 +84,11 @@ h1 {
     color: white;
 }
 
-.btn:hover {
+.btn-num:hover {
     background-color: rgb(25, 46, 86);
 }
 
-.btn:active {
+.btn-num:active {
     background-color: rgb(38, 73, 139);
 }
 
@@ -95,15 +98,15 @@ h1 {
     border-radius: 50px;
     font-size: 30px;
     color: white;
-    background-color: rgb(181, 82, 11);
+    background-color: rgb(181, 11, 11);
 }
 
 .btn-op:hover {
-    background-color: rgb(215, 103, 23);
+    background-color: rgb(225, 20, 20);
 }
 
 .btn-op:active {
-    background-color: rgb(255, 125, 31);
+    background-color: rgb(255, 138, 48);
 }
 
 
