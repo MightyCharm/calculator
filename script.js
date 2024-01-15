@@ -21,34 +21,61 @@ class Calculator {
     //=============================================================================00
     add() {
         console.log("method  add()");
-        display.value = (+this.prev) + (+this.current); // display value equal to result
-        this.prev = display.value; // prev equal to display value
+        let check = (+this.prev) + (+this.current);
+        if (check.toString().length > 10) {
+            this.prev = check.toFixed(10);
+            display.value = this.prev;
+            this.current = "";
+            return;
+        };
+        this.prev = check;
+        display.value = this.prev;
         this.current = "";
 
     }
 
     subtract() {
         console.log("method  subtract()");
-        display.value = (+this.prev) - (+this.current);
-        this.prev = display.value;
+        let check = (+this.prev) - (+this.current);
+        if (check.toString().length > 10) {
+            this.prev = check.toFixed(10);
+            display.value = this.prev;
+            this.current = "";
+            return;
+        };
+        this.prev = check;
+        display.value = this.prev;
         this.current = "";
     }
 
     multiply() {
         console.log("method  multiply()");
-        display.value = (+this.prev) * (+this.current);
-        this.prev = display.value;
-        this.current = "";
-        
-    }
+        let check = (+this.prev) * (+this.current);
+        if (check.toString().length > 10) {
+            this.prev = check.toFixed(10);
+            display.value = this.prev;
+            this.current = "";
+            return;
+        };
+        this.prev = check;
+        display.value = this.prev;
+        this.current = "";    
+    };
 
     divide() {
         console.log("method  divide()");
-        display.value = (+this.prev) / (+this.current);
-        this.prev = display.value;
-        this.current = "";
-        
-    }
+        let check = (+this.prev) / (+this.current);
+        if (check.toString().length > 10) {
+            console.log("to big");
+            this.prev = check.toFixed(10);
+            display.value = this.prev;
+            this.current = "";
+            return;
+        };
+        this.prev = check;
+        display.value = this.prev;
+        this.current = "";    
+    };
 
     
     operate() {
@@ -75,33 +102,68 @@ class Calculator {
     //====================================================================0
 
     setOperator(op) {
-        //console.log("method setOperator()")
-        if(this.prev === "") return // operator can't be the first input
-        
-
-        if(this.prev != "" && this.current != "") { // if prev and current aren't empty calculate result
+        console.log("method setOperator()")
+        if(this.prev === "" && op === "-") { // if user enters a minus first
+            this.prev = op;
+            return;
+        }
+        // if prev and current aren't empty calculate result
+        if(this.prev != "" && this.current != "") {
             this.operate()
         };
+
+
         this.operator = op;
+        // if number is not empty and starts with "-", show it on screen after operand button is pressed
+        if(this.prev != "") {
+            console.log("a: "+this.prev);
+            if(this.prev.toString().includes("-")) {
+                display.value = this.prev;
+            }
+        };
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     }
 
     setNumber(input) {
-        //console.log("method getNumber(number)")
+        console.log("method getNumber(number)")
         if(this.operator === "") { // if operator is empty input is prev
+            // this.prev
+            if(this.prev.toString().length > 15) return; // check that input is not to long
             if(input === "." && this.prev.includes(".")) return; // only one decimal per number
             if(this.prev === "" && input === ".") { // if first input is "." set to "0.""
                 this.prev = "0.";
                 display.value = this.prev;
                 return;
             }
+            if(input === "⌫") {
+                console.log("a");
+                this.prev = this.prev.slice(0, -1);
+                display.value = this.prev;
+                return;
+            }
+            
+            if(this.prev.includes("-")) { // check if first item - or so
+                console.log("minus");
+                this.prev += input;
+                display.value = this.prev.substr(1);
+                return;
+            }
+
             this.prev += input;
             display.value = this.prev;
         }
         else { // if operator is not empty input is current
+            // this.prev
+            if(this.current.toString().length > 15) return;
             if(input === "." && this.current.includes(".")) return; // only one decimal per number
             if(this.current === "" && input === ".") { // if first input is "." set to "0."
                 this.current = "0.";
+                display.value = this.current;
+                return;
+            }
+            if(input === "⌫") {
+                console.log("a");
+                this.current = this.current.slice(0, -1);
                 display.value = this.current;
                 return;
             }
@@ -109,13 +171,7 @@ class Calculator {
             display.value = this.current;
         };
         
-
-
         console.log("  this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
-    };
-
-    setDecimal() {
-        console.log("prev: " + this.prev.includes(".") + " current: " +this.current.includes("."))
     };
 }
 
@@ -175,5 +231,5 @@ btnAC.addEventListener("click", (e) => {
 ;});
 
 btnBackspace.addEventListener("click", (e) => {
-    console.log(e.target.value);
+    calc.setNumber(e.target.value);
 });

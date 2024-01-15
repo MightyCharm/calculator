@@ -31,7 +31,6 @@ h1 {
     flex-grow: 1;
     padding: 5px;
     gap: 2px;
-
 }
 
 .row-1 {
@@ -68,11 +67,10 @@ h1 {
     width: 400px;
     border: 3px solid black;
     border-radius: 5px;
-    font-size: 20px;
-    background-color: white;
-    font-size: 30px;
+    background-color: rgb(205, 203, 203);
+    font-size: 40px;
     text-align: right;
-    padding-right: 10px;
+    padding-right: 20px;
     margin-bottom: 5px;
 }
 
@@ -99,7 +97,7 @@ h1 {
     width: 100px;
     height: 100px;
     border-radius: 50px;
-    font-size: 30px;
+    font-size: 35px;
     color: white;
     background-color: rgb(181, 11, 11);
 }
