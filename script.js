@@ -52,7 +52,7 @@ class Calculator {
 
     
     operate() {
-        console.log("method operator()");
+        console.log("method operate()");
         // check if two numbers and operator were entered, then calculate
         switch(this.operator) {
             case "+":
@@ -86,21 +86,37 @@ class Calculator {
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     }
 
-    setNumber(num) {
+    setNumber(input) {
         //console.log("method getNumber(number)")
-        if(this.operator === "") {
-            this.prev += num;
+        if(this.operator === "") { // if operator is empty input is prev
+            if(input === "." && this.prev.includes(".")) return; // only one decimal per number
+            if(this.prev === "" && input === ".") { // if first input is "." set to "0.""
+                this.prev = "0.";
+                display.value = this.prev;
+                return;
+            }
+            this.prev += input;
             display.value = this.prev;
         }
-        else {
-            this.current += num;
+        else { // if operator is not empty input is current
+            if(input === "." && this.current.includes(".")) return; // only one decimal per number
+            if(this.current === "" && input === ".") { // if first input is "." set to "0."
+                this.current = "0.";
+                display.value = this.current;
+                return;
+            }
+            this.current += input;
             display.value = this.current;
         };
         
 
 
         console.log("  this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
-    }
+    };
+
+    setDecimal() {
+        console.log("prev: " + this.prev.includes(".") + " current: " +this.current.includes("."))
+    };
 }
 
 // create object
@@ -126,6 +142,7 @@ btnNumbers.forEach( (btn) => {
 
 btnDecimal.addEventListener("click", (e) => {
     console.log(e.target.value);
+    calc.setNumber(e.target.value);
 });
 
 btnSign.addEventListener("click", (e) => {
@@ -149,7 +166,8 @@ btnDivide.addEventListener("click", (e) => {
 });
 
 btnEqual.addEventListener("click", (e) => {
-    console.log(e.target.value);
+    //console.log("-> "+ e.target.value);
+    calc.operate()
 });
 
 btnAC.addEventListener("click", (e) => {
