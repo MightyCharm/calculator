@@ -11,35 +11,42 @@
         <h1>The Odin Project: Calculator</h1>
         <div id="container" class="container">
             <div class="row-1">
-                <input id="display" class="display">
+                <input id="display" class="display" readonly>
             </div>
 
             <div class="row-2">
+                <button id="btn-ac" class="btn-op2" value="ac">AC</button>
+                <button id="btn-sign" class="btn-op2" value="-">+/-</button>
+                <button id="btn-backspace" class="btn-op2" value="⌫">⌫</button>
+                <button id="btn-add" class="btn-op" value="+">+</button>
+            </div>
+
+            <div class="row-3">
                 <button id="btn-num" class="btn-num" value="7">7</button>
                 <button id="btn-num" class="btn-num" value="8">8</button>
                 <button id="btn-num" class="btn-num" value="9">9</button>
-                <button id="btn-op" class="btn-op btn-add" value="+">+</button>
+                <button id="btn-subtract" class="btn-op" value="-">-</button>
             </div>
                 
-            <div class="row-3">
+            <div class="row-4">
                 <button id="btn-num" class="btn-num" value="4">4</button>
                 <button id="btn-num" class="btn-num" value="5">5</button>
                 <button id="btn-num" class="btn-num" value="6">6</button>
-                <button id="btn-op" class="btn-op btn-subtract" value="-">-</button>
-            </div>
-
-            <div class="row-4">
-                <button id="btn-num" class="btn-num" value="1">1</button>
-                <button id="btn-num" class="btn-num" value="2">2</button>
-                <button id="btn-num" class="btn-num" value="3">3</button>
-                <button id="btn-op" class="btn-op btn-multiply" value="*">*</button>
+                <button id="btn-multiply" class="btn-op" value="*">*</button>
             </div>
 
             <div class="row-5">
-                <button id="btn-num" class="btn-num" value="0">0</button>
-                <button id="btn-op" class="btn-op" value="=">=</button>
-                <button id="btn-op" class="btn-op" value="clear">AC</button>
-                <button id="btn-op" class="btn-op btn-divide" value="/">/</button>
+                <button id="btn-num" class="btn-num" value="1">1</button>
+                <button id="btn-num" class="btn-num" value="2">2</button>
+                <button id="btn-num" class="btn-num" value="3">3</button>
+                <button id="btn-divide" class="btn-op" value="/">/</button>
+            </div>
+
+            <div class="row-6">
+                <button id="btn-num" class="btn-num btn-zero" value="0">0</button>
+                <button id="btn-decimal" class="btn-num" value=".">.</button>
+                <button id="btn-equal" class="btn-op" value="=">=</button>               
+                
             </div>
 
         </div>
