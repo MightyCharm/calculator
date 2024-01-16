@@ -131,3 +131,7 @@ h1 {
 .btn-op2:active {
     background-color: rgb(54, 109, 204);
 }
+
+.btn-num, .btn-op, .btn-op2 {
+    cursor: pointer;
+}
