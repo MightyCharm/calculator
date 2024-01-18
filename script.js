@@ -111,16 +111,16 @@ class Calculator {
 
     setNumber(input) {
         console.log("---------> method setNumber(input)")
-  
+        console.log(input);
         if(this.current.length > this.maxInputLength) return; // check that input gets not to long
         if(this.current.includes(".") && input === ".") return; // check only one decimal in a number
         if(this.current === "" && input === ".") { // if "." first input then "0.";
             this.current = "0.";
             return;
         };
+        
 
         if(this.current === "0" && input === "0") { // if first digit "0" than no "0" can follow
-            console.log("a)")
             this.current = "0";
             return;
         };
@@ -128,6 +128,12 @@ class Calculator {
         if(this.current === "0") { // if first digit 0 and next digit number, current equal to number
             this.current = input;
             return;
+        };
+        
+        // after pressing equal and calculating result, if user enters first a new number before
+        // pressing operator button, this prev will be clear, so a new calculation can happen
+        if(this.prev != "" && this.operator === "") {
+            this.prev = "";
         };
         
         this.current += input;
@@ -162,7 +168,7 @@ class Calculator {
             console.log("c)");
             display.value = this.prev;
             return;
-        }
+        };
         console.log("d)");
         display.value = this.current;
 
@@ -196,6 +202,34 @@ class Calculator {
        
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     };
+
+    setSign() {
+        console.log("-------> setSign()");
+        if(this.current != "" && this.current != "0") { // if current is not empty and not zero
+            console.log("a)");
+            // check if minus is already appended, if so, remove so it will be positive again
+            if(this.current.toString()[0] === "-") {
+                console.log("a1)");
+                this.current = this.current.toString().slice(1);
+                return;
+            };
+            console.log("a3)");
+            this.current =  "-" + this.current;
+            console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
+        };
+        if(this.prev != "" && this.prev != "0" && this.current === "") {
+            console.log("b)")
+            if(this.prev.toString()[0] === "-") {
+                console.log("b1)");
+                this.prev = this.prev.toString().slice(1);
+                return;
+            };
+            console.log("a3)");
+            this.prev =  "-" + this.prev;
+            console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
+
+        }
+    }
 
     setBtnColor (btn) {
         console.log("--------> setBtnColor()");
@@ -281,6 +315,8 @@ btnBackspace.addEventListener("click", (e) => {
 
 // button +/-
 btnSign.addEventListener("click", (e) => {
+    calc.setSign();
+    calc.updateDisplay();
     calc.setBtnColor();
 });
 
