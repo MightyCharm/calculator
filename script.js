@@ -53,8 +53,12 @@ class Calculator {
 
     divide() {
         console.log("---------> method divide()");
-        this.prevLength = this.prev.toString().length;
-        this.currentLength = this.current.toString().length;
+        if(this.current === "0") {
+            display.value = "Are you sure?"
+            this.prev = ""
+            this.current = ""
+            return;
+        };
         this.prev = (+this.prev) / (+this.current);
         this.roundNumber();
         this.current = "";
@@ -90,20 +94,16 @@ class Calculator {
     setOperator(op) {
         console.log("---------> method setOperator()") 
         if(this.prev === ""  && this.current != "") {
-            console.log("a)");
             this.prev = this.current;
             this.current = "";
         };
 
         if(this.prev == "0" && this.current != "") {
-            console.log("b)");
             this.prev = this.current;
             this.current = "";
         }
         this.operate();
         this.operator = op;
-        
-
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     };
 
@@ -116,7 +116,6 @@ class Calculator {
             return;
         };
         
-
         if(this.current === "0" && input === "0") { // if first digit 0 than no 0 can follow
             this.current = "0";
             return;
@@ -303,15 +302,18 @@ btnAC.addEventListener("click", (e) => {
     calc.setBtnColor();
 });
 
-// keyboard support
+// keyboard support (not optimal because my laptop has no numpad)
+// q="+"", w="-", e="*", r="/", enter="=" 
 document.addEventListener("keydown", (e) => {
     console.log(e.code);
     switch(e.code) {
         case "Digit0":
             calc.setNumber("0");
+            calc.setBtnColor();
             break;
         case "Digit1":
             calc.setNumber("1");
+            calc.setBtnColor();
             break;
         case "Digit2":
             calc.setNumber("2");
@@ -327,18 +329,23 @@ document.addEventListener("keydown", (e) => {
             break;
         case "Digit6":
             calc.setNumber("6");
+            calc.setBtnColor();
             break;
         case "Digit7":
             calc.setNumber("7");
+            calc.setBtnColor();
             break;
         case "Digit8":
             calc.setNumber("8");
+            calc.setBtnColor();
             break;
         case "Digit9":
             calc.setNumber("9");
+            calc.setBtnColor();
             break;
         case "Backspace":
             calc.setBackspace();
+            calc.setBtnColor();
             break;
         case "KeyQ":
             calc.setOperator("+");
@@ -357,7 +364,8 @@ document.addEventListener("keydown", (e) => {
             calc.setBtnColor("/");
             break;
         case "BracketRight":
-            calc.setSign()
+            calc.setSign();
+            calc.setBtnColor();
             break;
         case "Enter":
             calc.operate("=");
@@ -365,9 +373,14 @@ document.addEventListener("keydown", (e) => {
             break;
         case "Period":
             calc.setNumber(".");
-            calc.updateDisplay();
             calc.setBtnColor();
             break;
+        case "Escape":
+            calc.allClear()
+          
+            calc.setBtnColor()
+            break;
     };
+    console.log("here");
     calc.updateDisplay();
 });
