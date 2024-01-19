@@ -1,5 +1,4 @@
 
-
 class Calculator {
     constructor() {
         this.prev = "";
@@ -8,15 +7,14 @@ class Calculator {
         this.maxInputLength = 14;
         this.btnColorNormal = "rgb(181, 11, 11)";
         this.btnColorActive = "rgb(255, 138, 48)";
-    }
+    };
 
     allClear() {
         this.prev = "";
         this.current = "";
         this.operator = "";
         display.value = "0";
-
-    }
+    };
 
     roundNumber() {
         console.log("---------> roundNumber()");
@@ -111,7 +109,6 @@ class Calculator {
 
     setNumber(input) {
         console.log("---------> method setNumber(input)")
-        console.log(input);
         if(this.current.length > this.maxInputLength) return; // check that input gets not to long
         if(this.current.includes(".") && input === ".") return; // check only one decimal in a number
         if(this.current === "" && input === ".") { // if "." first input then "0.";
@@ -120,18 +117,18 @@ class Calculator {
         };
         
 
-        if(this.current === "0" && input === "0") { // if first digit "0" than no "0" can follow
+        if(this.current === "0" && input === "0") { // if first digit 0 than no 0 can follow
             this.current = "0";
             return;
         };
 
-        if(this.current === "0") { // if first digit 0 and next digit number, current equal to number
+        if(this.current === "0") { // if first digit 0 and next digit is another number, current number is equal to number
             this.current = input;
             return;
         };
         
         // after pressing equal and calculating result, if user enters first a new number before
-        // pressing operator button, this prev will be clear, so a new calculation can happen
+        // pressing operator button, this prev will be clear, so a new calculation can start
         if(this.prev != "" && this.operator === "") {
             this.prev = "";
         };
@@ -141,40 +138,29 @@ class Calculator {
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     };
 
-
     updateDisplay() {
         console.log("---------> updateDisplay()")
-        // if current number is empty but prev not
-        console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
-        //console.log("1: " + (this.prev === "") + " value: " + this.prev);
-        //console.log("2: " + (this.current === "") + " value: " + this.current);
 
+         // if prev is not empty, but current is, show prev
         if( this.prev != "" && this.current === "") {
-            console.log("a)");
             display.value = this.prev;
             return;
         };
 
-        // if everything is empty, set current to 0;
+         // if everything is empty, set current to 0;
         if(this.prev === "" && this.current === "") {
-            console.log("b)");
             this.current = "0";
             display.value = this.current;
             return;
         };
 
-        // if prev is zero and current is empty, display prev
+         // if prev is zero and current is empty, display prev
         if(this.prev == "0" && this.current === "") {
-            console.log("c)");
             display.value = this.prev;
             return;
         };
-        console.log("d)");
         display.value = this.current;
-
-
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
-        // if nothing in current
     };
 
     setBackspace () {
@@ -197,43 +183,37 @@ class Calculator {
                 this.current = this.current.toString().slice(0, -1);
             }
             return;
-        };
-
-       
+        }; 
         console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
     };
 
     setSign() {
         console.log("-------> setSign()");
-        if(this.current != "" && this.current != "0") { // if current is not empty and not zero
+
+        // if current is not empty and not zero
+        if(this.current != "" && this.current != "0") { 
             console.log("a)");
-            // check if minus is already appended, if so, remove so it will be positive again
+            // check if minus is already appended, if so, it will be removed
             if(this.current.toString()[0] === "-") {
-                console.log("a1)");
                 this.current = this.current.toString().slice(1);
                 return;
             };
-            console.log("a3)");
             this.current =  "-" + this.current;
-            console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
         };
+        // if current is empty, do the same as above only with prev
         if(this.prev != "" && this.prev != "0" && this.current === "") {
-            console.log("b)")
             if(this.prev.toString()[0] === "-") {
-                console.log("b1)");
                 this.prev = this.prev.toString().slice(1);
                 return;
             };
-            console.log("a3)");
             this.prev =  "-" + this.prev;
             console.log(" this.prev: " + this.prev + "  this.operator: " + this.operator + "  this.current: " + this.current);
-
-        }
-    }
+        };
+    };
 
     setBtnColor (btn) {
         console.log("--------> setBtnColor()");
-        // set everything back to normal
+        // first set everything back to normal color
         btnAdd.style.backgroundColor = this.btnColorNormal;
         btnSubtract.style.backgroundColor = this.btnColorNormal;
         btnMultiply.style.backgroundColor = this.btnColorNormal;
@@ -260,13 +240,12 @@ class Calculator {
 let calc = new Calculator();
 const display = document.querySelector("#display");
 display.value = "0";
-// add event handlers for number buttons
 const btnNumbers = document.querySelectorAll("#btn-num");
 const btnOperators = document.querySelectorAll("#btn-op");
-const btnAdd = document.querySelector("#btn-add"); // for changing color if active
-const btnSubtract = document.querySelector("#btn-subtract"); // for changing color if active
-const btnMultiply = document.querySelector("#btn-multiply"); // for changing color if active
-const btnDivide = document.querySelector("#btn-divide"); // for changing color if active
+const btnAdd = document.querySelector("#btn-add");
+const btnSubtract = document.querySelector("#btn-subtract");
+const btnMultiply = document.querySelector("#btn-multiply");
+const btnDivide = document.querySelector("#btn-divide");
 const btnSign = document.querySelector("#btn-sign");
 const btnEqual = document.querySelector("#btn-equal");
 const btnAC = document.querySelector("#btn-ac");
@@ -302,7 +281,6 @@ btnDivide.addEventListener("click", (e) => {
 
 
 btnEqual.addEventListener("click", (e) => {
-    //console.log("-> "+ e.target.value);
     calc.operate(e.target.value);
     calc.setBtnColor();
 });
@@ -325,17 +303,71 @@ btnAC.addEventListener("click", (e) => {
     calc.setBtnColor();
 });
 
-
-
-// next: keyboard support
+// keyboard support
 document.addEventListener("keydown", (e) => {
     console.log(e.code);
+    switch(e.code) {
+        case "Digit0":
+            calc.setNumber("0");
+            break;
+        case "Digit1":
+            calc.setNumber("1");
+            break;
+        case "Digit2":
+            calc.setNumber("2");
+            break;
+        case "Digit3":
+            calc.setNumber("3");
+            break;
+        case "Digit4":
+            calc.setNumber("4");
+            break;
+        case "Digit5":
+            calc.setNumber("5");
+            break;
+        case "Digit6":
+            calc.setNumber("6");
+            break;
+        case "Digit7":
+            calc.setNumber("7");
+            break;
+        case "Digit8":
+            calc.setNumber("8");
+            break;
+        case "Digit9":
+            calc.setNumber("9");
+            break;
+        case "Backspace":
+            calc.setBackspace();
+            break;
+        case "KeyQ":
+            calc.setOperator("+");
+            calc.setBtnColor("+");
+            break;
+        case "KeyW":
+            calc.setOperator("-");
+            calc.setBtnColor("-");
+            break;
+        case "KeyE":
+            calc.setOperator("*");
+            calc.setBtnColor("*");
+            break;
+        case "KeyR":
+            calc.setOperator("/");
+            calc.setBtnColor("/");
+            break;
+        case "BracketRight":
+            calc.setSign()
+            break;
+        case "Enter":
+            calc.operate("=");
+            calc.setBtnColor();
+            break;
+        case "Period":
+            calc.setNumber(".");
+            calc.updateDisplay();
+            calc.setBtnColor();
+            break;
+    };
+    calc.updateDisplay();
 });
-
-/*btnOperators.forEach( (btn) => {
-    btn.addEventListener("click", (e) => {
-        calc.setOperator(e.target.value);
-        calc.setBtnColor(e.target.value);
-    });
-});
-*/
